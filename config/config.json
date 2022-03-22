@@ -1,0 +1,24 @@
+{
+  "development": {
+    "username": "root",
+    "password": "root",
+    "database": "db_rest_api",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "logging": true
+  },
+  "test": {
+    "username": "root",
+    "password": "root",
+    "database": "db_rest_api",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "root",
+    "password": "root",
+    "database": "db_rest_api",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}
