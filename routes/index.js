@@ -4,8 +4,8 @@ const api = require('./api');
 
 const router = Router();
 
-router.use('/auth', auth);
-router.use('/api', api);
+router.use('/auth/v1/', auth);
+router.use('/api/v1/', api);
 
 /* GET index page. */
 router.get('*', (req, res) => {
