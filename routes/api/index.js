@@ -1,13 +1,10 @@
 const { Router } = require('express');
 const { checkToken } = require('../../middleware/token');
-const { api } = require('../../controllers');
-
-const { getUserData } = api;
+const user = require('./user');
 
 const router = Router();
 
 router.use(checkToken);
 
-router.get('/', getUserData);
-
+router.use('/user', user);
 module.exports = router;
