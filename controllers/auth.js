@@ -74,8 +74,10 @@ const login = (req, res) => {
             token,
             refreshToken
           });
-        });
-    });
+        })
+        .catch((err) => res.send(err));
+    })
+    .catch((err) => res.send(err));
 };
 
 const refreshToken = (req, res) => {
