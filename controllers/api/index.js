@@ -1,8 +1,5 @@
-const getUserData = (req, res) => {
-  const { token } = req;
-  res.send(token);
-};
+const { userData } = require('./user');
 
 module.exports = {
-  getUserData,
+  userData,
 };
