@@ -1,9 +1,7 @@
 const { check } = require('express-validator');
 const { Router } = require('express');
-const { auth } = require('../controllers');
 const { handleValidationErrors } = require('../middleware/validator');
-
-const { register, login, refreshToken } = auth;
+const Controllers = require('../controllers');
 
 const router = Router();
 
@@ -25,7 +23,7 @@ router.post(
       .withMessage('password is required')
   ],
   handleValidationErrors,
-  register
+  Controllers.auth.register
 );
 router.post(
   '/login',
@@ -40,7 +38,7 @@ router.post(
       .withMessage('password is required')
   ],
   handleValidationErrors,
-  login
+  Controllers.auth.login
 );
 router.post(
   '/refresh-token',
@@ -50,6 +48,6 @@ router.post(
       .withMessage('token is required')
   ],
   handleValidationErrors,
-  refreshToken
+  Controllers.auth.refreshToken
 );
 module.exports = router;
