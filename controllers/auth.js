@@ -55,15 +55,13 @@ const login = (req, res) => {
           const {
             id,
             userName,
-            email: userEmail,
-            userLevel
+            email: userEmail
           } = userData;
 
           const tokenData = {
             id,
             userName,
-            email: userEmail,
-            userLevel
+            email: userEmail
           };
 
           const token = jwt.sign(tokenData, secretKey, { expiresIn: '1d' });
