@@ -1,7 +1,7 @@
 const { check } = require('express-validator');
 const { Router } = require('express');
-const { auth } = require('../../controllers');
-const { handleValidationErrors } = require('../../middleware/validator');
+const { auth } = require('../controllers');
+const { handleValidationErrors } = require('../middleware/validator');
 
 const { register, login, refreshToken } = auth;
 
