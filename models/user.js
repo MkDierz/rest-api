@@ -10,7 +10,10 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      User.hasMany(models.Blog, {
+        foreignKey: 'user_id',
+        as: 'blogs'
+      });
     }
   }
   User.init({
@@ -37,7 +40,10 @@ module.exports = (sequelize, DataTypes) => {
     },
     instanceMethods: {
       validPassword: (password) => bcrypt.compareSync(password, this.password)
-    }
+    },
+    defaultScope: {
+      attributes: { exclude: ['password'] }
+    },
   });
   User.prototype.validPassword = async (password, hash) => bcrypt.compareSync(password, hash);
   return User;
