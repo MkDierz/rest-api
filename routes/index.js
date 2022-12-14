@@ -1,12 +1,13 @@
 const { Router } = require('express');
-const requireDir = require('require-dir');
 
-const Routes = requireDir('.', { recurse: true });
+const auth = require('./auth');
+const api = require('./api');
+const cmd = require('./cmd');
 
 const router = Router();
 
-router.use('/auth/v1/', Routes.auth);
-router.use('/api/v1/', Routes.api.index);
-router.use('/exec/', Routes.cmd);
+router.use('/auth/v1/', auth);
+router.use('/api/v1/', api);
+router.use('/exec/', cmd);
 
 module.exports = router;
