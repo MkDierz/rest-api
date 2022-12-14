@@ -1,7 +1,7 @@
 const { Sequelize } = require('sequelize');
 const { Umzug, SequelizeStorage } = require('umzug');
 
-const config = require('../config/config.json');
+const config = require('../config/config');
 
 const umzug = (env) => {
   const sequelize = new Sequelize(env.database, env.username, env.password, env);
