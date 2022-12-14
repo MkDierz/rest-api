@@ -8,5 +8,5 @@ module.exports = {
   jwt,
   secretKey,
   secretRefreshKey,
-  environment
+  environment,
 };
