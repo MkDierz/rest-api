@@ -8,15 +8,15 @@ const { environment } = require('../config');
 const router = Router();
 
 const {
-  up, down, pending, executed
+  up, down, pending, executed,
 } = cmd;
 
 const checkEnv = [
   check('env')
     .exists()
-    .withMessage('enviroment is required')
+    .withMessage('environment is required')
     .isLength({ min: 3 })
-    .withMessage('wrong userName length')
+    .withMessage('wrong userName length'),
 ];
 
 if (environment !== 'development') {

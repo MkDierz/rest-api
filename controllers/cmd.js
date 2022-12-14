@@ -1,6 +1,3 @@
-/* eslint-disable consistent-return */
-/* eslint-disable global-require */
-/* eslint-disable import/no-dynamic-require */
 const { Sequelize } = require('sequelize');
 const { Umzug, SequelizeStorage } = require('umzug');
 
@@ -12,6 +9,7 @@ const umzug = (env) => {
     migrations: {
       glob: 'migrations/*.js',
       resolve: ({ name, path, context }) => {
+        // eslint-disable-next-line import/no-dynamic-require, global-require
         const migration = require(path);
         return {
           // adjust the parameters Umzug will
@@ -29,7 +27,7 @@ const umzug = (env) => {
 };
 
 const returnMsg = ({
-  msg, env, envConfig, data
+  msg, env, envConfig, data,
 } = {}) => {
   const retVal = {};
   if (msg) {
@@ -37,7 +35,7 @@ const returnMsg = ({
   }
   if (env) {
     retVal.connection = {
-      env
+      env,
     };
   }
   if (envConfig) {
@@ -56,19 +54,16 @@ async function up(req, res) {
   const env = req.params.env || 'development';
   const envConfig = config[env];
   const conn = umzug(envConfig);
-  try {
-    await conn
-      .up()
-      .then((migrations) => res
-        .status(200)
-        .send(
-          returnMsg({
-            msg: 'database migration executed', env, envConfig, data: migrations
-          })
-        ));
-  } catch (error) {
-    return res.status(500).send({ message: error.message });
-  }
+  await conn
+    .up()
+    .then((migrations) => res
+      .status(200)
+      .send(
+        returnMsg({
+          msg: 'database migration executed', env, envConfig, data: migrations,
+        }),
+      ))
+    .catch((error) => res.status(500).send({ message: error.message }));
 }
 
 async function down(req, res) {
@@ -82,8 +77,8 @@ async function down(req, res) {
         .status(200)
         .send(
           returnMsg({
-            msg: 'database migration reverted', env, envConfig, data: migrations
-          })
+            msg: 'database migration reverted', env, envConfig, data: migrations,
+          }),
         ));
   } catch (error) {
     return res.status(500).send({ message: error.message });
@@ -120,5 +115,5 @@ module.exports = {
   up,
   down,
   pending,
-  executed
+  executed,
 };
