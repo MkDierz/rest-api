@@ -1,1 +1,5 @@
-module.exports = require('require-dir')('.', { recurse: true });
+const api = require('./api');
+const auth = require('./auth');
+const cmd = require('./cmd');
+
+module.exports = { api, auth, cmd };

@@ -1,7 +1,7 @@
 const { Router } = require('express');
-const Controller = require('../../controllers');
+const { api } = require('../../controllers');
 
-const { userData, updateProfile } = Controller.api.user;
+const { userData, updateProfile } = api.user;
 
 const router = Router();
 
