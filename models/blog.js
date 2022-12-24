@@ -1,5 +1,5 @@
 const {
-  Model
+  Model,
 } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Blog.belongsTo(models.User, {
         foreignKey: 'user_id',
-        as: 'user'
+        as: 'user',
       });
     }
   }
@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     user_id: DataTypes.INTEGER,
     blogTitle: DataTypes.STRING,
     blogContent: DataTypes.TEXT,
-    blogPublic: DataTypes.BOOLEAN
+    blogPublic: DataTypes.BOOLEAN,
   }, {
     sequelize,
     modelName: 'Blog',

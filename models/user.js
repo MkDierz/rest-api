@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       User.hasMany(models.Blog, {
         foreignKey: 'user_id',
-        as: 'blogs'
+        as: 'blogs',
       });
     }
   }
@@ -36,13 +36,13 @@ module.exports = (sequelize, DataTypes) => {
           const salt = bcrypt.genSaltSync(10, 'a');
           user.password = bcrypt.hashSync(user.password, salt);
         }
-      }
+      },
     },
     instanceMethods: {
-      validPassword: (password) => bcrypt.compareSync(password, this.password)
+      validPassword: (password) => bcrypt.compareSync(password, this.password),
     },
     defaultScope: {
-      attributes: { exclude: ['password'] }
+      attributes: { exclude: ['password'] },
     },
   });
   User.prototype.validPassword = async (password, hash) => bcrypt.compareSync(password, hash);

@@ -1,28 +1,19 @@
 {
-  "extends": [
-    "airbnb",
-    "plugin:jsx-a11y/recommended"
-  ],
   "env": {
-    "node": true,
-    "mocha": true,
-    "es6": true
+    "commonjs": true,
+    "es2021": true,
+    "node": true
   },
-  "rules": {
-    "max-len": [
-      "error",
-      {
-        "code": 120,
-        "ignoreComments": true,
-        "ignoreUrls": true,
-        "ignoreStrings": true
-      }
-    ],
-    "no-unused-vars": [
-      "error",
-      {
-        "argsIgnorePattern": "next"
-      }
-    ]
-  }
+  "extends": [
+    "plugin:vue/vue3-essential",
+    "airbnb-base"
+  ],
+  "overrides": [],
+  "parserOptions": {
+    "ecmaVersion": "latest"
+  },
+  "plugins": [
+    "vue"
+  ],
+  "rules": {}
 }
