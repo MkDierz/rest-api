@@ -9,7 +9,7 @@ const register = (req, res) => {
     })
     .then((data) => {
       if (data) {
-        return res.status(400).send({
+        return res.status(400).json({
           message: 'email exist',
         });
       }
@@ -19,14 +19,14 @@ const register = (req, res) => {
           email,
           password,
         })
-        .then(() => res.status(200).send({
+        .then(() => res.status(200).json({
           message: 'user registered',
           email,
           userName,
         }))
-        .catch((err) => res.status(500).send(err));
+        .catch((err) => res.status(500).json(err));
     })
-    .catch((err) => res.status(500).send(err));
+    .catch((err) => res.status(500).json(err));
 };
 
 const login = (req, res) => {
@@ -39,7 +39,7 @@ const login = (req, res) => {
     })
     .then((userData) => {
       if (!userData) {
-        return res.status(400).send({
+        return res.status(400).json({
           message: 'email not found',
         });
       }
@@ -47,7 +47,7 @@ const login = (req, res) => {
         .validPassword(password, userData.password)
         .then((isAuth) => {
           if (!isAuth) {
-            return res.send({
+            return res.json({
               message: 'unauthorized',
             });
           }
@@ -65,15 +65,15 @@ const login = (req, res) => {
           const token = jwt.sign(tokenData, secretKey, { expiresIn: '1d' });
           const refreshToken = jwt.sign(tokenData, secretRefreshKey, { expiresIn: '7d' });
 
-          return res.send({
+          return res.json({
             message: 'authorized',
             token,
             refreshToken,
           });
         })
-        .catch((err) => res.status(500).send(err));
+        .catch((err) => res.status(500).json(err));
     })
-    .catch((err) => res.status(500).send(err));
+    .catch((err) => res.status(500).json(err));
 };
 
 const refreshUserToken = (req, res) => {
@@ -87,7 +87,7 @@ const refreshUserToken = (req, res) => {
     delete data.exp;
     delete data.iat;
 
-    return res.send({
+    return res.json({
       message: 'token refreshed',
       token: jwt.sign(data, secretKey, { expiresIn: '1d' }),
       refreshToken: jwt.sign(data, secretKey, { expiresIn: '7d' }),
